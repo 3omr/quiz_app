@@ -109,77 +109,81 @@ class QuestionCard extends StatelessWidget {
       cardColor = isCorrect ? Colors.green.shade800 : Colors.red.shade800;
     }
 
-    return Card(
-      color: cardColor ?? const Color(0xff6848fd),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.r),
-        side: BorderSide(
-          color: const Color(0xff36edbc).withOpacity(0.3),
-          width: 1.5.w,
-        ),
-      ),
-      elevation: 4,
-      child: Padding(
-        padding: EdgeInsets.all(16.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (question.imageUrl != null)
-              Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.r),
-                  child: Image.network(
-                    question.imageUrl!,
-                    width: double.infinity,
-                    height: 150.h,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            Text(
-              question.title,
-              style: GoogleFonts.poppins(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
+    return ListView(
+      children: [
+        Card(
+          color: cardColor ?? const Color(0xff6848fd),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            side: BorderSide(
+              color: const Color(0xff36edbc).withOpacity(0.3),
+              width: 1.5.w,
             ),
-            SizedBox(height: 12.h),
-            ...question.quizOptions.map(
-              (option) => RadioListTile<int>(
-                title: Text(
-                  option.option,
+          ),
+          elevation: 4,
+          child: Padding(
+            padding: EdgeInsets.all(16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (question.imageUrl != null)
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 12.h),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.r),
+                      child: Image.network(
+                        question.imageUrl!,
+                        width: double.infinity,
+                        height: 150.h,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                Text(
+                  question.title,
                   style: GoogleFonts.poppins(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                 ),
-                value: option.id,
-                groupValue: selectedAnswer,
-                activeColor: const Color(0xff36edbc),
-                onChanged: isAnswered
-                    ? null
-                    : (value) {
-                        cubit.answerQuestion(question.id, value!);
-                      },
-              ),
-            ),
-            if (isAnswered)
-              Padding(
-                padding: EdgeInsets.only(top: 8.h),
-                child: Text(
-                  'Correct Answer: ${question.correctAnswer}',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
+                SizedBox(height: 12.h),
+                ...question.quizOptions.map(
+                  (option) => RadioListTile<int>(
+                    title: Text(
+                      option.option,
+                      style: GoogleFonts.poppins(
+                        fontSize: 16.sp,
+                        color: Colors.white,
+                      ),
+                    ),
+                    value: option.id,
+                    groupValue: selectedAnswer,
+                    activeColor: const Color(0xff36edbc),
+                    onChanged: isAnswered
+                        ? null
+                        : (value) {
+                            cubit.answerQuestion(question.id, value!);
+                          },
                   ),
                 ),
-              ),
-          ],
+                if (isAnswered)
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.h),
+                    child: Text(
+                      'Correct Answer: ${question.correctAnswer}',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
