@@ -27,6 +27,7 @@ class ResultsScreen extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        iconTheme: const IconThemeData(color: Color(0xff36edbc)),
         backgroundColor: const Color(0xff1f1147),
         elevation: 0,
       ),

@@ -92,7 +92,12 @@ class _QuizScreenState extends State<QuizScreen> {
                 SizedBox(height: 20.h),
 
                 // Questions count with loading state
-                BlocBuilder<QuizCubit, QuizState>(
+                BlocConsumer<QuizCubit, QuizState>(
+                  listener: (context, state) {
+                    if (state is QuizRestart) {
+                      context.read<QuizCubit>().loadQuiz();
+                    }
+                  },
                   builder: (context, state) {
                     if (state is QuizLoading) {
                       return const CircularProgressIndicator(

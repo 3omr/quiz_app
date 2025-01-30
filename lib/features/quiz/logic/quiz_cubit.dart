@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/features/quiz/data/models/quiz_model.dart';
-import 'package:quiz_app/features/quiz/data/models/quiz_option.dart';
+import 'package:quiz_app/features/quiz/data/quiz_data.dart';
 import 'package:quiz_app/features/quiz/logic/quiz_state.dart';
 
 class QuizCubit extends Cubit<QuizState> {
@@ -16,106 +16,7 @@ class QuizCubit extends Cubit<QuizState> {
     try {
       await Future.delayed(const Duration(seconds: 1));
       _resetQuizData();
-      quiz = [
-        QuizModel(
-          title:
-              'A 67-year-old smoker with chest pain. The ECG shows a positive wave when the depolarization wave moves towards the positive pole.',
-          quizOptions: [
-            const QuizOption(
-                option:
-                    'Depolarization wave spreads towards the +ve pole of the lead.',
-                id: 1),
-            const QuizOption(
-                option:
-                    'Depolarization wave spreads towards the -ve pole of the lead.',
-                id: 2),
-            const QuizOption(
-                option:
-                    'Depolarization wave spreads towards the +ve pole of the lead.',
-                id: 3),
-            const QuizOption(
-                option:
-                    'Depolarization wave spreads towards the -ve pole of the lead.',
-                id: 4),
-          ],
-          correctAnswer:
-              'Depolarization wave spreads towards the -ve pole of the lead.',
-          id: 1,
-        ),
-        QuizModel(
-          title: 'What is Flutter?',
-          imageUrl: 'https://i.ibb.co/j6zQybt/image.png',
-          quizOptions: [
-            const QuizOption(option: 'Programming language', id: 1),
-            const QuizOption(option: 'Development framework', id: 2),
-            const QuizOption(option: 'Design tool', id: 3),
-            const QuizOption(option: 'Database', id: 4),
-          ],
-          correctAnswer: 'Development framework',
-          id: 2,
-        ),
-        QuizModel(
-          title: 'What is Flutter?',
-          imageUrl: 'https://i.ibb.co/j6zQybt/image.png',
-          quizOptions: [
-            const QuizOption(option: 'Programming language', id: 1),
-            const QuizOption(
-                option:
-                    'Development framework, Development framework, Development framework',
-                id: 2),
-            const QuizOption(option: 'Design tool', id: 3),
-            const QuizOption(option: 'Database', id: 4),
-          ],
-          correctAnswer: 'Development framework',
-          id: 6,
-        ),
-        QuizModel(
-          title: 'What is Flutter?',
-          imageUrl: 'https://i.ibb.co/j6zQybt/image.png',
-          quizOptions: [
-            const QuizOption(option: 'Programming language', id: 1),
-            const QuizOption(
-                option:
-                    'Development framework, Development framework, Development framework',
-                id: 2),
-            const QuizOption(option: 'Design tool', id: 3),
-            const QuizOption(option: 'Database', id: 4),
-          ],
-          correctAnswer: 'Development framework',
-          id: 3,
-        ),
-        QuizModel(
-          title: 'What is Flutter?',
-          imageUrl: 'https://i.ibb.co/j6zQybt/image.png',
-          quizOptions: [
-            const QuizOption(option: 'Programming language', id: 1),
-            const QuizOption(
-                option:
-                    'Development framework, Development framework, Development framework',
-                id: 2),
-            const QuizOption(option: 'Design tool', id: 3),
-            const QuizOption(option: 'Database', id: 4),
-          ],
-          correctAnswer: 'Development framework',
-          id: 4,
-        ),
-        QuizModel(
-          title: 'What is Flutter?',
-          imageUrl: 'https://i.ibb.co/j6zQybt/image.png',
-          quizOptions: [
-            const QuizOption(option: 'Programming language', id: 1),
-            const QuizOption(
-                option:
-                    'Development framework, Development framework, Development framework',
-                id: 2),
-            const QuizOption(option: 'Design tool', id: 3),
-            const QuizOption(option: 'Database', id: 4),
-          ],
-          correctAnswer: 'Development framework',
-          id: 5,
-        ),
-      ];
-
+      quiz = QuizData.quiz;
       emit(QuizLoaded(quiz, 0));
     } catch (e) {
       emit(QuizError('Failed to load quiz: ${e.toString()}'));
